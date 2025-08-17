@@ -12,7 +12,7 @@
 /* These two macros are used in type related logic,
  *
  * for example, 
-        var a = Int(45);
+        var a = Int(45)
         
         if (a.type == Int Type) {
             print("The value of the integer a is %.", a);
@@ -40,6 +40,11 @@
  */
 #define None 0
 #define Type (0).type
+
+/* ... */
+#define typeofInt long int
+#define typeofFloat double
+#define typeofChar char
 
 /* To store Integers, Floating Points and Characters all using only datatype (union). */
 union _val_;
@@ -212,6 +217,7 @@ struct _var_ __toInt(var * _str);
 #define toFloat(_str) __toFloat(&_str) 
 struct _var_ __toFloat(var * _str);
 
+#define __printFormatSpecifier      '%'
 /* Function : Prints the formatted string. 
  * 
  * Parameters:
