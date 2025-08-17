@@ -4,11 +4,6 @@
 
 /* --------------------------------------| Standard Declaratons |-------------------------------------- */
 
-
-#define typeofInt long int
-#define typeofFloat double
-#define typeofChar char
-
 union _val_ {
     typeofInt Int;
     typeofChar Char;
@@ -21,8 +16,6 @@ struct _var_ {
     union _val_  value;
     struct _var_ * next;
 };
-#define var struct _var_
-
 
 var NoValue = {0, 0, NULL};
 
@@ -144,7 +137,6 @@ struct _var_ __toFloat(var * _str) {
     return ret;
 }
 
-#define __printFormatSpecifier      '%'
 unsigned long int print(const char * _format, ...) {
     unsigned long int ret = 0;
     int ret_delta = 0;
