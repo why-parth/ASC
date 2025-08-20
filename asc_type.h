@@ -1,5 +1,5 @@
-#ifndef __ASC_TYPE_H__
-#define __ASC_TYPE_H__
+#ifndef ASC_TYPE_H
+#define ASC_TYPE_H
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
@@ -47,7 +47,11 @@
 #define typeofChar char
 
 /* To store Integers, Floating Points and Characters all using only datatype (union). */
-union _val_;
+union _val_ {
+    typeofInt Int;
+    typeofChar Char;
+    typeofFloat Float;
+};
 
 /* To store all the information of a variable, that are:
     - type (unsigned int)
@@ -61,10 +65,12 @@ union _val_;
         You can assign pointer-to various types and structures to attatch information to the var(s).
  * 
  */
-struct _var_;
 
-/* To compactify the notation of struct _var_ */
-#define var struct _var_
+typedef struct _var_ {
+    unsigned int type;
+    union _val_  value;
+    struct _var_ * next;
+} var;
 
 /* --------------------------------------| Standard Datatypes |--------------------------------------
  * 
@@ -90,13 +96,13 @@ struct _var_;
  *
  */
 
-/* Dayatype : Int (Integer) */
+/* Datatype : Int (Integer) */
 struct _var_ Int(long int _int);
 
-/* Dayatype : Char (Character) */
+/* Datatype : Char (Character) */
 struct _var_ Char(char _char);
 
-/* Dayatype : Float (Floating Points) */
+/* Datatype : Float (Floating Points) */
 struct _var_ Float(double _float);
 
 /* --------------------------------------| Included Datatypes |--------------------------------------
@@ -155,8 +161,8 @@ unsigned long int __printStr(struct _var_ _str);
 
 /* Macros for handling the freeing of strings. */
 #define getstr(a)           ((char *)a.next)
-#define freestr(a)          free(a.next); a.type = None; a.value.Int = None; a.next = NULL;
-var * __handleStr = NULL;
+#define freestr(a)          free(a.next); a.type = None; a.value.Int = None; a.next = NULL
+extern struct _var_ * __handleStr;
 #define clear               free(
 #define string              .next)
 #define clearstr            ; free(__handleStr->next); __handleStr->next = NULL

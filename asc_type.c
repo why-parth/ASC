@@ -1,23 +1,10 @@
-#ifndef __ASC_TYPE_C__
-#define __ASC_TYPE_C__
 #include "asc_type.h"
 
 /* --------------------------------------| Standard Declaratons |-------------------------------------- */
 
-union _val_ {
-    typeofInt Int;
-    typeofChar Char;
-    typeofFloat Float;
-};
 union _val_ __tempVal;
-
-struct _var_ {
-    unsigned int type;
-    union _val_  value;
-    struct _var_ * next;
-};
-
-var NoValue = {0, 0, NULL};
+struct _var_ *__handleStr = NULL;
+var NoValue = {0, {0}, NULL};
 
 /* --------------------------------------| Standard Datatypes |-------------------------------------- */
 
@@ -74,13 +61,13 @@ unsigned long int __printLinkedVars(struct _var_ * _linkedVar) {
 unsigned long int __printStr(struct _var_ _str) {
     unsigned long int len = _str.value.Int;
     char * strPtr = (char *)(_str.next); 
-    for (int i = 0; i < len; i++) {
+    for (unsigned int i = 0; i < len; i++) {
         putchar(strPtr[i]);
     }
     return len;
 }
 
-/* -----------------| Standard Functions and DOS(s) for Above Defeined Datatypes |----------------- */
+/* -----------------| Standard Functions and DOS(s) for Above Defined Datatypes |----------------- */
 
 struct _var_ __toInt(var * _str) {
     __handleStr = _str;
@@ -142,7 +129,7 @@ unsigned long int print(const char * _format, ...) {
     int ret_delta = 0;
 
     char curr = _format[ret];
-    char prev = '\0';
+    char prev;
     char read = 0;
 
     var arg;
@@ -158,9 +145,9 @@ unsigned long int print(const char * _format, ...) {
 
             arg = va_arg(args, struct _var_);
 
-            if      (arg.type == Int Type)      ret_delta += printf("%Ld", arg.value.Int);
+            if      (arg.type == Int Type)      ret_delta += printf("%ld", arg.value.Int);
             else if (arg.type == Char Type)     ret_delta += printf("%c", arg.value.Char);
-            else if (arg.type == Float Type)    ret_delta += printf("%Lf", arg.value.Float);
+            else if (arg.type == Float Type)    ret_delta += printf("%lf", arg.value.Float);
             else if (arg.type == Str Type)      ret_delta += __printStr(arg);
 
             ret_delta--, putchar(curr);
@@ -176,6 +163,4 @@ unsigned long int print(const char * _format, ...) {
     return ret + ret_delta;
 }
 
-struct _var_ istream = {4, 0, NULL};
-
-#endif
+struct _var_ istream = {4, {0}, NULL};
