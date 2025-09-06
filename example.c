@@ -1,7 +1,7 @@
-#include "asc_type.h"
+#include <stdio.h>
 
-int main(void) {
-    var a = Str("45");
-    print("%", a);
+int main(int argc, char ** argv) {
+
+
     return 0;
 }

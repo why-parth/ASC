@@ -1,5 +1,5 @@
-#ifndef ASC_TYPE_H
-#define ASC_TYPE_H
+#ifndef __ASC_TYPE_H__
+#define __ASC_TYPE_H__
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>

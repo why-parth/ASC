@@ -1,31 +1,5 @@
 #include "reader.h"
 
-/* Logic */
-function(blockStarts) {
-    printf ( "block starts");
-
-    nestExpecter(';');
-}
-
-function(blockEnds) {
-    printf("-block ends-");
-
-    freeRecentExpecter();
-}
-
-function(instruction) {
-    char BlockEnded = 0;
-    pollExpecterAs(a){
-        if (c == '}' && a == '{') BlockEnded = 1;
-        a = pollExpecter();
-    }
-
-    freeRecentExpecter();
-
-    if (BlockEnded) blockEnds();
-    else printf("-instruction-");
-}
-
 /* sof and eof definition */
 void enteringTheMainFunction(void) {
     printf("Your file \"%s\" is going to be read:\n", _filename);
@@ -39,15 +13,13 @@ void exitingTheMainFunction(void) {
 #define sof enteringTheMainFunction
 #define eof exitingTheMainFunction
 
-/* Development */
-development {
+/* iter definition */
+void iterationFunction(void) {
+    putchar(c);
+}
 
-    pushMode(blockStarts); // 1
+#define iter iterationFunction
 
-    modeOf('{') = 1;
-
-    pushExpectation('{', '}', blockEnds);
-    pushExpectation(';', ';', instruction);
-    pushExpectation(';', '}', instruction);
+development{
 
 }

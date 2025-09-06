@@ -33,22 +33,29 @@
  */
 
 /* 0 for no debugging, 1 for debugging. */
-#define DEBUG (1)
+#define DEBUG (0)
 #define debug if DEBUG
 
 /* For Development */
-#define        development          void expectationDevelopment (void)
-#define           function(n)       void * n (void)
+#define            development          void expectationDevelopment (void)
+#define               function(n)       void * n (void)
 extern char * _filename;
-#define          enterMain          initExpectations(); initExpecter(); initModeList(); FILE * _file = fopen(_filename, "r")
-#define           exitMain          free(modeList); free(expecter); fclose(_file)
-#define             modeOf(a)       expect[a].mode
-#define   startReadingFile(c)       while (c != EOF)
-#define       readFromFile(c)       c = fgetc(_file)
-#define     pollExpecterAs(c)       char c = pollExpecter(); if (c != 0) while (c != 0)
+
+#define              enterMain          initExpectations(); initExpecter(); initModeList(); FILE * _file = fopen(_filename, "r")
+#define               exitMain          free_raw_buffer(); (modeList); free(expecter); fclose(_file)
+
+#define                 modeOf(a)       expect[a].mode
+#define       startReadingFile(c)       while (c != EOF)
+#define           readFromFile(c)       c = fgetc(_file)
+#define         pollExpecterAs(c)       char c = pollExpecter(); if (c != 0) while (c != 0)
+
+#define   updateCharClassFlags(c)       PreviousCharClass = CurrentCharClass; CurrentCharClass = getCharClass(c); if (PreviousCharClass != CurrentCharClass) CharClassIsChanged = 1; else CharClassIsChanged = 0
+#define                  SPACE          0x01
+#define                 NUMBER          0x02
+#define               ALPHABET          0x04
+#define                 SYMBOL          0x08
 
 /* APC Variables (char(s)) */
-// Defining varibles in .h files is not a good practice, but sometimes we have to unfollow the standards
 extern char c;
 
 /* Datatype that stores the buffer functions. */
@@ -118,5 +125,13 @@ int printExpectations(char a, const char * s);
 
 /* Pushes the expectation e on the char a and attatches the function f to e. */
 struct expected_call * pushExpectation(char a, char e, buffer_function f);
+
+
+/* Character Class Flags */
+extern int CharClassIsChanged;
+extern int PreviousCharClass;
+extern int CurrentCharClass;
+
+unsigned int getCharClass(char c);
 
 #endif

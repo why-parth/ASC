@@ -20,6 +20,7 @@
         - nesting of classes (sub-classes) ----------------------------------------------------- (not yet added)
         - interperating class configuration changes (Keyword Logic) --- working of the reader -- (not yet added)
         - defining sof and eof
+        - defining iter
  * 
  */
 
@@ -54,6 +55,15 @@ int main(int argc, char ** argv){
     startReadingFile(c) {
         readFromFile(c); // updating the variable char
         if (halt > 0) halt--;
+
+        /* Char Class Flag Handler */
+
+        updateCharClassFlags(c);  
+
+        /* Iteration Function */
+        #ifdef iter
+        iter();
+        #endif
 
         /* DEBUG */ 
         if DEBUG putchar(c);

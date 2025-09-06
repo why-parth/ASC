@@ -1,5 +1,3 @@
-#ifndef __ASC_APC_C__
-#define __ASC_APC_C__
 #include "asc_apc.h"
 
 char c = 0;
@@ -133,5 +131,3 @@ struct mode * getMode(int m) {
     if (m && varMode->next == NULL) return NULL;
     return varMode;
 }
-
-#endif
