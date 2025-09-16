@@ -2,9 +2,9 @@
 #define __READER_H__
 #include <stdio.h>
 
-#include "for buffer.h/asc_type.h"
-#include "for buffer.h/asc_simple_buffer.h"
-#include "for buffer.h/asc_complex_buffer.h"
+#include "asc_type.h"
+#include "asc_simple_buffer.h"
+#include "asc_complex_buffer.h"
 
 /* Declaring the Buffer "fvar" */
 __declare_buffer(Var, var);

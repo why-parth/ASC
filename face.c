@@ -19,17 +19,17 @@ int main (int argc, char ** argv) {
     unsigned int len = 0;
     while (file_name[len]) len++;
 
-    char * cmd_1 = "gcc \
-    .\\reader.c\
-    \
-    \".\\for reader.c\\asc_apc.c\" \
-    \".\\for reader.c\\asc_apc_character_class.c\" \
-    \
-    \".\\for buffer.h\\asc_simple_buffer.c\" \
-    \".\\for buffer.h\\asc_type.c\" \
-    \".\\buffer.c\" \
-    \
-    -o reader";
+    char cmd_1[] = "gcc \
+.\\reader.c \
+\
+\".\\asc_apc.c\" \
+\".\\asc_apc_char_class.c\" \
+\
+\".\\asc_simple_buffer.c\" \
+\".\\asc_type.c\" \
+\".\\buffer.c\" \
+\
+-o reader";
 
     char * cmd_2 = malloc(sizeof(char) * (len + 4));
 
@@ -38,6 +38,7 @@ int main (int argc, char ** argv) {
     strcpy(cmd_2 + cmd_len, file_name);
     cmd_len += len;
 
+    // printf("> %s\n", cmd_1);
     system(cmd_1);
     system(cmd_2);
 
