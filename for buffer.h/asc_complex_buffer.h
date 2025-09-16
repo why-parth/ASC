@@ -12,29 +12,9 @@
  * 
  * Use of this header requires you to define:
  * 
-       unsigned int __number_of_buffers = 0;
-
-       size_t __active_buffer = 0;
-       
-       void __push(size_t value) {
-              if (__active_buffer == 0) {}
-              else __auto_push(buff)
-       }
-
-       size_t __print(char * in_between) {
-              size_t ret = 0;
-              if (__active_buffer == 0) {}
-              else __auto_print_char(buff)
-
-              return ret;
-       }
-
-       void __free(void) {
-              if (__active_buffer == 0) {}
-              else __auto_free
-       }
+       ...
  *
- * "buffer.c" is the full implementation of all the buffer headers and their utilities.
+ * "buffer.h" and "buffer.c" is the full implementation of all the buffer headers and their utilities.
  */
 
 /* Stores the number of buffers that are declared. */
@@ -75,88 +55,91 @@ extern size_t __active_buffer;
 #define getbuffer(name) ((struct name *)(name()))->next
 
 /* Function that pushes onto the acitve buffer. */
-void __push(size_t value);
+// void __push(size_t value);
 
 /* Macro that is used to form a complete independent instruction. */
 #define Push(value) (); __push(value)
 
 /* Automates your pushing logic. */
-#define __auto_push(name)                                                                                              \
+#define __auto_push(name, val)                                                                                         \
        if (__active_buffer == name()) {                                                                                \
               struct name * varBuff = (struct name *) __active_buffer;                                                 \
               while (varBuff->next != NULL) varBuff = varBuff->next;                                                   \
               varBuff->next = malloc(sizeof(struct name));                                                             \
               varBuff->next->next = NULL;                                                                              \
-              varBuff->next->value = value;                                                                            \
+              varBuff->next->value = val;                                                                              \
        }
 
 /* Function that prints the acitve buffer. */
-size_t __print(char * in_between);
+// size_t __print(char * in_between);
+
+/* To store the length of the printed buffer. */
+extern unsigned long long __printedBufferLength;
 
 /* Macro that is used to form a complete independent instruction. */
-#define Print(in_between) (); __print(in_between)
+#define Print(btw) (); __print(btw)
 
 /* Automates your printing logic (prints the integer equivalent). */
-#define __auto_print_int(name)                                                                                         \
+#define __auto_print_int(name, btw)                                                                                    \
        if (__active_buffer == name()) {                                                                                \
               struct name * varBuff = (struct name *) __active_buffer;                                                 \
               varBuff = varBuff->next;                                                                                 \
               while (varBuff->next != NULL) {                                                                          \
-                     ret += printf("%d", varBuff->value);                                                              \
+                     __printedBufferLength += printf("%d", varBuff->value);                                            \
                      varBuff = varBuff->next;                                                                          \
-                     ret += printf(in_between);                                                                        \
+                     __printedBufferLength += printf(btw);                                                             \
               }                                                                                                        \
-              ret += printf("%d", varBuff->value);                                                                     \
+              __printedBufferLength += printf("%d", varBuff->value);                                                   \
        }
 
 /* Automates your printing logic (prints the character equivalent). */
-#define __auto_print_char(name)                                                                                        \
+#define __auto_print_char(name, btw)                                                                                   \
        if (__active_buffer == name()) {                                                                                \
               struct name * varBuff = (struct name *) __active_buffer;                                                 \
               varBuff = varBuff->next;                                                                                 \
               while (varBuff->next != NULL) {                                                                          \
-                     ret++; putchar(varBuff->value);                                                                   \
+                     __printedBufferLength++; putchar(varBuff->value);                                                 \
                      varBuff = varBuff->next;                                                                          \
-                     ret += printf(in_between);                                                                        \
+                     __printedBufferLength += printf(btw);                                                             \
               }                                                                                                        \
-              ret++; putchar(varBuff->value);                                                                          \
+              __printedBufferLength++; putchar(varBuff->value);                                                        \
        }
 
 /* Automates your printing logic (uses a custom instruction for printing). */
-#define __auto_print_custom(name, custom)                                                                              \
+#define __auto_print_custom(name, btw, custom)                                                                         \
        if (__active_buffer == name()) {                                                                                \
               struct name * varBuff = (struct name *) __active_buffer;                                                 \
               varBuff = varBuff->next;                                                                                 \
               while (varBuff->next != NULL) {                                                                          \
                      custom;                                                                                           \
                      varBuff = varBuff->next;                                                                          \
-                     ret += printf(in_between);                                                                        \
+                     __printedBufferLength += printf(btw);                                                             \
               }                                                                                                        \
               custom;                                                                                                  \
        }
 
 /* Function that prints the acitve buffer. */
-void __free(void);
+// void __free(void);
 
 /* Macro that is used to form a complete independent instruction. */
-#define Free (); __free()
+#define Free (); __free
 
 /* Frees the first link of the buffer. */
 #define freebuffer(name) free((void *)name())
 
 /* Automates the freeing logic. */
-#define __auto_free                                                                                                    \
-       if ((__active_buffer == buff())) {                                                                              \
-              struct buff * prevBuff = NULL;                                                                           \
-              struct buff * currBuff = NULL;                                                                           \
-              currBuff = (struct buff *)__active_buffer;                                                               \
+#define __auto_free(name)                                                                                                    \
+       if ((__active_buffer == name())) {                                                                              \
+              struct name * prevBuff = NULL;                                                                           \
+              struct name * currBuff = NULL;                                                                           \
+              currBuff = (struct name *)__active_buffer;                                                               \
               currBuff = currBuff->next;                                                                               \
               while (currBuff != NULL) {                                                                               \
                      prevBuff = currBuff;                                                                              \
                      currBuff = currBuff->next;                                                                        \
                      free(prevBuff);                                                                                   \
               }                                                                                                        \
-              free((void *)buff());                                                                                    \
+              free((void *)name());                                                                                    \
        }
 
 

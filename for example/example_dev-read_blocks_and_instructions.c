@@ -29,7 +29,7 @@ function(instruction) {
 
 /* sof and eof definition */
 void enteringTheMainFunction(void) {
-    printf("Your file \"%s\" is going to be read:\n", _filename);
+    printf("Your file \"%s\" is going to be read: \n", _filename);
 }
 
 void exitingTheMainFunction(void) {

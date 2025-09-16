@@ -1,7 +1,7 @@
 #ifndef __READER_H__
 #define __READER_H__
 #include <stdio.h>
-#include "asc_apc.h"
+#include "for reader.c\asc_apc.h"
 
 /* This is function is NOT desingned to actually print raw form
 (raw string literal.This function is desingned to provide an

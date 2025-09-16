@@ -16,7 +16,7 @@
         - polling expecters
         - halting 
         - dynamic nest control (DNC) --- working of the reader
-        - declaring classes -------------------------------------------------------------------- (not yet added)
+        - declaring classes
         - nesting of classes (sub-classes) ----------------------------------------------------- (not yet added)
         - interperating class configuration changes (Keyword Logic) --- working of the reader -- (not yet added)
         - defining sof and eof
@@ -47,7 +47,7 @@ int main(int argc, char ** argv){
     /* Development Space */ //----\------------/-------------------\--------------------------/---------------
     // If you wish to manually develop this file, this area is safe for any definition                                           
                                                                                                                                  
-    expectationDevelopment();                                                                                                    
+    __reader_development__();                                                                                                    
                                                                                                                                  
     //-----------\---------------------------/---------------------------\---------------------------\--------
 

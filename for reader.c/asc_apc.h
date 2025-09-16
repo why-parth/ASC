@@ -33,16 +33,16 @@
  */
 
 /* 0 for no debugging, 1 for debugging. */
-#define DEBUG (0)
+#define DEBUG (1)
 #define debug if DEBUG
 
 /* For Development */
-#define            development          void expectationDevelopment (void)
+#define            development          void __reader_development__ (void)
 #define               function(n)       void * n (void)
 extern char * _filename;
 
 #define              enterMain          initExpectations(); initExpecter(); initModeList(); FILE * _file = fopen(_filename, "r")
-#define               exitMain          free_raw_buffer(); (modeList); free(expecter); fclose(_file)
+#define               exitMain          (modeList); free(expecter); fclose(_file)
 
 #define                 modeOf(a)       expect[a].mode
 #define       startReadingFile(c)       while (c != EOF)

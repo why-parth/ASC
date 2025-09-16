@@ -1,0 +1,9 @@
+Compile face.c and then pass is code.f (or any other file you want to read).
+
+The reading process depends upon the file "dev.c", face.exe compiles the reader as per dev.c's development.
+
+code.f will be red and specific functions will be called,
+for example, the file "example_dev-read_blocks_and_instructions.c" can be used by copy-pasting the code from this file to the file "dev.c".
+Or, by going into the file "reader.c" and re-defining src as "example_dev-read_blocks_and_instructions.c".
+
+Feel free to explore this code.

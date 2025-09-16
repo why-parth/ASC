@@ -1,0 +1,4 @@
+These are some example files for you to experiment with!
+
+All the files that exist in this folder needs to be taken out to the same folder as of face.c for compilation.
+This is to ensure complete safety!

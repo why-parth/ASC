@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "asc_complex_buffer.h": "c",
+        "asc_simple_buffer.h": "c",
+        "buffer.h": "c",
+        "asc_apc.h": "c"
+    }
+}
