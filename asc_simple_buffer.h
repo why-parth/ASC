@@ -37,6 +37,9 @@ extern struct _simple_buffer_head_ raw;
         raw.last->next = NULL;                                                                                          \
         raw.last->value = 
 
+/* Function that pushes onto Raw */
+void PushRaw(char _to_push);
+
 /* Macro that prints Raw */
 #define printRaw                                                                                                        \
         if (raw.first) {                                                                                                \
@@ -44,12 +47,16 @@ extern struct _simple_buffer_head_ raw;
             while (__temp_raw_link != NULL) putchar(__temp_raw_link->value), __temp_raw_link = __temp_raw_link->next;   \
         }
 
+/* Function that prints Raw */
+void PrintRaw(void);
+
 /* Function that frees Raw */
 void __free_simple_buffer_links(struct _simple_buffer_link_ * _del);
 
 /* Macro that free Raw */
 #define freeRaw                                                                                                         \
         __free_simple_buffer_links(raw.first);                                                                          \
+        raw.length = 0;                                                                                                 \
         raw.first = NULL;                                                                                               \
         raw.last = raw.first                                                                                            \
 

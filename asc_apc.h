@@ -33,7 +33,7 @@
  */
 
 /* 0 for no debugging, 1 for debugging. */
-#define DEBUG (1)
+#define DEBUG (0)
 #define debug if DEBUG
 
 /* For Development */
@@ -49,12 +49,23 @@ extern char * _filename;
 #define           readFromFile(c)       c = fgetc(_file)
 #define         pollExpecterAs(c)       char c = pollExpecter(); if (c != 0) while (c != 0)
 
-#define   updateCharClassFlags(c)       PreviousCharClass = CurrentCharClass; CurrentCharClass = getCharClass(c); if (PreviousCharClass != CurrentCharClass) CharClassIsChanged = 1; else CharClassIsChanged = 0
+#define   updateCharClassFlags(c)       PreviousCharClass = CurrentCharClass;                                       \
+                                        CurrentCharClass = getCharClass(c);                                         \
+                                        if (PreviousCharClass != CurrentCharClass) CharClassIsChanged = 1;          \
+                                        else CharClassIsChanged = 0
+
 #define                  SPACE          0x01
 #define                 NUMBER          0x02
-#define               ALPHABET          0x04
+#define               ALPHABET          0x04   
 #define                 SYMBOL          0x08
-
+#define                   OPEN          0x10
+#define                  CLOSE          0x20
+#define                   PARA          0x02 // BRACKET must be checked first
+#define                   CURL          0x04 // BRACKET must be checked first
+#define                    BOX          0x08 // BRACKET must be checked first
+#define                NULLIFY          0x40
+#define              TERMINATE          0x80
+  
 /* APC Variables (char(s)) */
 extern char c;
 

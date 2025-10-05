@@ -5,6 +5,9 @@
 #include <stdarg.h>
 #include <string.h>
 
+#define __maximumDataTypeNameLength        6
+#define __printFormatSpecifier            '%'
+
 /// // / Errors are not handled, but are reduced to a great extent. Follow the proper grammer to prevent any error. / // ///
 
 /* --------------------------------------| Standard Declaratons |-------------------------------------- */
@@ -40,6 +43,9 @@
  */
 #define None 0
 #define Type (0).type
+
+#define StringOf __nameOfType + (__maximumDataTypeNameLength + 1) *
+extern char * __nameOfType;
 
 /* ... */
 #define typeofInt long int
@@ -223,7 +229,6 @@ struct _var_ __toInt(var * _str);
 #define toFloat(_str) __toFloat(&_str) 
 struct _var_ __toFloat(var * _str);
 
-#define __printFormatSpecifier      '%'
 /* Function : Prints the formatted string. 
  * 
  * Parameters:

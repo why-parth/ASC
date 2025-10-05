@@ -7,3 +7,11 @@ for example, the file "example_dev-read_blocks_and_instructions.c" can be used b
 Or, by going into the file "reader.c" and re-defining src as "example_dev-read_blocks_and_instructions.c".
 
 Feel free to explore and alter the entire code!
+
+
+
+lasc : Layout Scanning
+asc : a simplified c
+face : fast assembler of c executable
+env : environment
+fgi : fast graphic interface

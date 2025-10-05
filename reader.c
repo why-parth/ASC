@@ -54,16 +54,11 @@ int main(int argc, char ** argv){
     // opening the read loop
     startReadingFile(c) {
         readFromFile(c); // updating the variable char
-        if (halt > 0) halt--;
+        // if (halt > 0) halt--; // do this in the iteration function
 
         /* Char Class Flag Handler */
 
         updateCharClassFlags(c);  
-
-        /* Iteration Function */
-        #ifdef iter
-        iter();
-        #endif
 
         /* DEBUG */ 
         if DEBUG putchar(c);
@@ -94,7 +89,7 @@ int main(int argc, char ** argv){
 
         /* Mode Handler */ //-----\--------------/---------------------------\--------------------/-----------
         varMode = getMode(expect[c].mode);
-        if (varMode != NULL && !halt) {
+        if (varMode != NULL) {
 
             /* DEBUG */
             if DEBUG printf("\033[0;91m<");
@@ -102,6 +97,11 @@ int main(int argc, char ** argv){
             if DEBUG printf("\033[0;91m>\033[0m");
         }
         
+        /* Iteration Function */
+        #ifdef iter
+        iter();
+        #endif
+
     }
 
     /* Development Space */ //----\------------/-------------------\--------------------------/---------------

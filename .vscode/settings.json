@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "asc_simple_buffer.h": "c",
+        "asc_type.h": "c",
+        "buffer.h": "c"
+    }
+}

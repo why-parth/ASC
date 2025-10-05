@@ -1,58 +1,35 @@
-#ifndef __READER_H__
-#define __READER_H__
-#include <stdio.h>
+#ifndef __BUFFER_H__
+#define __BUFFER_H__
 
 #include "asc_type.h"
 #include "asc_simple_buffer.h"
 #include "asc_complex_buffer.h"
 
-/* Declaring the Buffer "fvar" */
+//// /// // / Declarations
+
+/* Declaration of Var Buffer */
 __declare_buffer(Var, var);
 
-/* Automates your printing logic (prints the var equivalent). */
-#define __auto_print_var(name, btw)                                                                             \
-       if (__active_buffer == name()) {                                                                         \
-              struct name * varBuff = (struct name *) __active_buffer;                                          \
-              varBuff = varBuff->next;                                                                          \
-              while (varBuff->next != NULL) {                                                                   \
-                     __printedBufferLength += print("%", varBuff->value);                                       \
-                     varBuff = varBuff->next;                                                                   \
-                     __printedBufferLength += printf(btw);                                                      \
-              }                                                                                                 \
-              __printedBufferLength += print("%", varBuff->value);                                              \
-       }
+/* Declarations of functions for Var Buffer */
 
-/* Variable Initialisation */
-#define __push(value)                                                                                           \
-              if (__active_buffer == 0) {}                                                                      \
-              else __auto_push(Var, value)
+// Pushes a var on to the Buffer Var
+void PushVar(var _Var);
 
-#define __print(btw)                                                                                            \
-              if (__active_buffer == 0) {}                                                                      \
-              else __auto_print_var(Var, btw)
+// Prints the Buffer Var
+void PrintVar(char * in_between);
 
-#define __free                                                                                                  \
-              if (__active_buffer == 0) {}                                                                      \
-              else __auto_free(Var)
+// Frees the Buffer Var
+void FreeVar(void);
 
-/* Helping Utility (for tne buffer "Var") */
-extern size_t __VarSetIndex;
-extern var GetVar;
+//// /// // / Initializing the Complex Buffer Command
 
-#define SetVar(i)                                                                                               \
-       {                                                                                                        \
-              struct Var * varBuff = (struct Var *) __active_buffer;                                            \
-              varBuff = varBuff->next;                                                                          \
-              for (__VarSetIndex = 0; (varBuff->next != NULL) && (__VarSetIndex < i); __VarSetIndex++) {        \
-                     varBuff = varBuff->next;                                                                   \
-              }                                                                                                 \
-              GetVar = varBuff->value;                                                                          \
-       }
+/* Initializing the 'Push' Complex Buffer Command */
+#define Push(value) (1); __auto_push(Var, value)
 
-/* Function that returns the var storing the string of the simple buffer */
-var __var_of_raw(void);
+/* Initializing the 'Print' Complex Buffer Command */
+#define Print(in_between) (1); __auto_print_custom(Var, in_between, __printedBufferLength += printf(StringOf varBuff->value.type) + print("\t%", varBuff->value))
 
-/* Macro that returns the var storing the string of the simple buffer */
-#define varRaw __var_of_raw()
+/* Initializing the 'Free' Complex Buffer Command */
+#define Free (1); forBuffer(Var) { FreeVar(); }
 
 #endif

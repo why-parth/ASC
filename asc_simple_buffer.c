@@ -9,6 +9,14 @@ void __free_simple_buffer_links(struct _simple_buffer_link_ * _del) {
     free(_del);
 }
 
+void PushRaw(char _to_push) {
+    pushRaw _to_push;
+}
+
+void PrintRaw(void) {
+    printRaw;
+}
+
 char * __string_of_raw(void) {
     char * ret = (char *)malloc(1 + sizeof(char) * raw.length);
     if (!raw.first) return 0;

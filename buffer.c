@@ -1,25 +1,25 @@
 #include "buffer.h"
 
-/* Defining the Buffer "fvar" */
-size_t Var (void) __auto_define_buffer(Var)
+/* include these files at the time of compilation. */
+// #include "asc_simple_buffer.c"
+// #include "asc_type.c"
 
-/* Constant Initialisation */
-unsigned int __number_of_buffers = 0;
-size_t __active_buffer = 0;
-unsigned long long __printedBufferLength = 0;
+/* Initializing the Complex Buffers */
+__initialiseComplexBuffers
 
-/* Helping Utility (for buffer "Var") */
-size_t __VarSetIndex = 0;
+//// /// // / Definitions
 
-var GetVar = {0, {0}, NULL};
+/* Definition of Var Buffer */
+size_t Var(int p) __auto_define_buffer(Var)
 
-var __var_of_raw(void) {
+/* Definitions of functions for Var Buffer */
 
-    var ret;
-    ret.type = Str Type;
-    ret.value.Int = raw.length;
-    ret.next = (var *) strRaw;
+void PushVar(var _Var) { Var Push(_Var) }
 
-    return ret;
+void PrintVar(char * in_between) { Var Print(in_between) }
+
+void FreeVar(void) {
+   for (struct Var * toFree = getbuffer(Var); !__buffer_exceeded, jumpbuffer(toFree))
+   if (toFree->value.type == Str Type) { freestr(toFree->value); }
+   __auto_free(Var);
 }
-

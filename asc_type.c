@@ -1,6 +1,9 @@
 #include "asc_type.h"
 
+
 /* --------------------------------------| Standard Declaratons |-------------------------------------- */
+
+char * __nameOfType = "None\0-\0Int\0--\0Char\0-\0Float\0\0Str\0--";
 
 union _val_ __tempVal;
 struct _var_ *__handleStr = NULL;
